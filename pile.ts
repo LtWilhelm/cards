@@ -1,12 +1,12 @@
-import { Card, Suit } from "./card";
-import { Game, suits } from "./game";
+import { Card, Suit } from "./card.ts";
+import { Game, suits } from "./game.ts";
 
 export class Pile {
   id: string;
   cards: Card[];
   game: Game;
 
-  constructor(game: Game, ...cards) {
+  constructor(game: Game, ...cards: Card[]) {
     this.cards = cards;
     if (!this.cards.length) this.cards = suits.flatMap(s => {
       const cards: Card[] = [];
@@ -18,6 +18,8 @@ export class Pile {
       return cards;
     })
     this.game = game;
+
+    this.id = this.game.getNewPileId().toString();
   }
 
   shuffle() {

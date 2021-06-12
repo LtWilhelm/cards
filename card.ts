@@ -8,16 +8,16 @@ export enum suitToColor {
 }
 
 export class Card {
-  suit: Suit;
+  suit?: Suit;
   color: string;
   rank: number;
 
   constructor(color: string, rank: number);
   constructor(suit: Suit, rank: number);
   constructor(suit: Suit | string, rank: number) {
-    if (suitToColor[suit]) {
+    if (suit && suitToColor[suit as keyof typeof suitToColor]) {
       this.suit = suit as Suit;
-      this.color = suitToColor[suit];
+      this.color = suitToColor[suit as keyof typeof suitToColor];
     } else {
       this.color = suit;
     }
